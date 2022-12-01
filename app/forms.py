@@ -1,9 +1,6 @@
-from app import app
 from flask_wtf import FlaskForm
 import wtforms as ws
 from flask_login import current_user
-
-from app.models import User
 
 class EmployeeForm(FlaskForm):
     fullname = ws.StringField('ФИО')
@@ -11,7 +8,7 @@ class EmployeeForm(FlaskForm):
     short_info = ws.TextAreaField('Краткая информация')
     experience = ws.IntegerField('Опыт работы в годах')
     preferred_position = ws.StringField('Желаемая должность')
-    user =  current_user #ws.StringField('Пользователь')
+    user =  current_user 
     submit = ws.SubmitField('Сохранить')
 
     def validate_fullname(self, field):

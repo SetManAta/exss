@@ -8,6 +8,11 @@
         <div class="card-header">
             <h2>Добавление нового клиента</h2>
         </div>
+        {% for field in form %}
+        {% for error in field.errors %}
+        <big class="form-text text-danger">{{ error }}</big>
+          {% endfor %}
+     {% endfor %}
         <div class="content-inside">
             {{ form.fullname.label() }}
             {{ form.fullname(class="form-control", placeholder="ФИО") }}

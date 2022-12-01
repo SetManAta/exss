@@ -8,6 +8,7 @@ def load_user(user_id):
 
 
 class User(UserMixin,db.Model):
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False,unique=True)
     password_hash = db.Column(db.String,nullable=False)
@@ -34,5 +35,5 @@ class Employee(db.Model):
     short_info = db.Column(db.String)
     experience = db.Column(db.Integer)
     preferred_position = db.Column(db.String)
-    user = db.relationship(User, backref=db.backref('employee', lazy='dynamic'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship(User, backref=db.backref('users', lazy='dynamic'))
+    user_name = db.Column(db.String, db.ForeignKey('users.username'))

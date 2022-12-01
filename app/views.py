@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for,flash
 from .models import Employee, User
 from app import db
 from .forms import EmployeeForm, UserForm
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required,current_user
 
 
 def index():
@@ -14,7 +14,7 @@ def employee_create():
     form = EmployeeForm(request.form)
     if request.method == 'POST':
         if form.validate_on_submit():
-            employees = Employee()
+            employees = Employee(user_name=current_user.username)
             form.populate_obj(employees)
             db.session.add(employees)
             db.session.commit()
@@ -30,6 +30,8 @@ def employee_detail(id):
 @login_required
 def employee_delete(id):
     employees = Employee.query.get(id)
+    if employees.user_name != current_user.username:
+        flash('Другой пользователь')
     if request.method == 'POST':
         db.session.delete(employees)
         db.session.commit()
@@ -40,6 +42,8 @@ def employee_delete(id):
 def employee_update(id):
     employees = Employee.query.get(id)
     form = EmployeeForm(request.form, obj=employees)
+    if employees.user_name != current_user.username:
+        flash('Другой пользователь')
     if request.method == 'POST':
         if form.validate_on_submit():
             form.populate_obj(employees)
