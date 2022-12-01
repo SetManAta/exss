@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ФИО</th>
+          <th scope="col">Номер телефона</th>
+          <th scope="col">Краткая информация</th>
+          <th scope="col">Опыт</th>
+          <th scope="col">Предпочитаемая должность</th>
+          <th scope="col">Менеджер</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for employee in employees %}
+        <tr>
+          <th scope="row">{{ employee.id }}</th>
+          <td>{{ employee.fullname }}</td>
+          <td>{{ employee.phone }}</td>
+          <td>{{ employee.short_info }}</td>
+          <td>{{ employee.experience  }}</td>
+          <td>{{ employee.preferred_position }}</td>
+          <td>{{ employee.user.username }}</td>
+          <td><a class="btn btn-outline-primary" href="{{ url_for('employee_detail', id=employee.id)}}" >Подробнее</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

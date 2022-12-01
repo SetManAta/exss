@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <form method="POST" action="{{ url_for('employee_create') }}">
+        {{ form.csrf_token }}
+        <div class="card-header">
+            <h2>Добавление нового клиента</h2>
+        </div>
+        <div class="content-inside">
+            {{ form.fullname.label() }}
+            {{ form.fullname(class="form-control", placeholder="ФИО") }}
+            {{ form.phone.label() }}
+            {{ form.phone(class="form-control", placeholder="Телефон") }}
+            {{ form.short_info.label() }}
+            {{ form.short_info(class="form-control", placeholder="Краткая информация") }}
+            {{ form.experience.label() }}
+            {{ form.experience(class="form-control", placeholder="Опыт работы в годах") }}
+            {{ form.preferred_position.label() }}
+            {{ form.preferred_position(class="form-control", placeholder="Желаемая должность") }}
+            {{ form.submit(class="btn btn-primary submit-button") }}
+        </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

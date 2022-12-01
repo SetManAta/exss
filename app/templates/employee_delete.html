@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <form method="POST" action="{{ url_for('employee_delete', id=employees.id) }}">
+        {{ csrf_token }}
+        <div class="card-header">
+            <h2>Удаление клиента</h2>
+        </div>
+        <div class="content-inside">
+            <p>Вы действительно хотите удалить запись о {{ employees.fullname }}</p>
+            <button type="submit" class="btn btn-primary">Удалить</button>
+        </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

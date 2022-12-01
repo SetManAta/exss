@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ employees.fullname }}</h5>
+      <p class="card-text">Предпочитаемая должность: {{ employees.preferred_position }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">тел: {{ employees.phone }}</li>
+      <li class="list-group-item">Краткая информация: {{ employees.short_info }}</li>
+      <li class="list-group-item">Опыт работы: {{ employees.experience }} лет</li>
+      <li class="list-group-item">HR Менеджер {{ employees.user.username }}</li>
+    </ul>
+    <div class="card-body">
+      <a href="{{url_for('employee_delete', id=employees.id)}}" class="card-link">Удалить запись</a>
+      <a href="{{url_for('employee_update', id=employees.id)}}" class="card-link">Изменить запись</a>
+    </div>
+  </div>
+</div>
+{% endblock content %}
